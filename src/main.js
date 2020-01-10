@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import index from './components/Index.vue'
 import router from './router/index.js'
-import login from './components/Login.vue'
+// import login from './components/Login.vue'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -17,6 +17,6 @@ new Vue({
   render: h => h(index)
 }).$mount('#app')
 
-new Vue({
-  render: h => h(login)
-}).$mount('#app2')
+// new Vue({
+//   render: h => h(login)
+// }).$mount('#app2')

@@ -8,10 +8,11 @@
         <a class="p-2 text-dark" href="#">Support</a>
         <a class="p-2 text-dark" href="#">Pricing</a>
       </nav>
-      <a class="btn btn-outline-primary" href="/login">Sign up</a>
+      <a class="btn btn-outline-primary" href="/login" v-show="!login">log in</a>
+      <a class="btn btn-outline-primary" v-show="login" @click="logout">log out</a>
     </div>
 
-    <router-view>
+    <router-view @transfer="islogin">
     </router-view>
 
     <footer class="container py-5" style="position:relative; bottom: 0;">
@@ -67,9 +68,21 @@
 <script>
 export default {
   name: 'index',
+  data () {
+    return {
+      login: false
+    }
+  },
   methods: {
     tohome () {
       this.$router.push('/')
+    },
+    islogin (info) {
+      this.login = info
+    },
+    logout () {
+      this.login = false
+      console.log(this.login)
     }
   }
 }

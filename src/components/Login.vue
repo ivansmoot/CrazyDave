@@ -7,20 +7,21 @@
     </div>
 
     <!-- <div class="form-label-group" v-show="dialog_visible">
-      <el-form type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="username">
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="username">
       <label for="inputEmail">邮箱</label>
     </div>
 
     <div class="form-label-group" v-show="dialog_visible">
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="password">
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required  v-model="password">
       <label for="inputPassword">密码</label>
     </div> -->
+
     <el-form status-icon :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" style="margin-left: -30px">
       <el-form-item label="账号" prop="account">
-        <el-input v-model="ruleForm.account" style="width: 400px"></el-input>
+        <el-input v-model="ruleForm.account" style="width: 400px" placeholder="admin"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="ruleForm.pass" style="width: 400px"></el-input>
+        <el-input type="password" v-model="ruleForm.pass" style="width: 400px" placeholder="password"></el-input>
       </el-form-item>
       <el-form-item label="验证码" prop="checkcode">
         <el-input v-model="ruleForm.checkcode" style="width: 300px"></el-input>
@@ -74,7 +75,7 @@
   left: 20%;
   right: 20%;
   width: 500px;
-  height: auto;
+  height: 700px;
   margin: 0 auto;
 }
 .copyright{
@@ -191,6 +192,8 @@ export default {
             //   })
             // }
           })
+          this.$emit('transfer', true)
+          this.$router.push('/')
         } else {
           console.log('wrong password')
           this.$alert('请重新输入', '验证码错误', {
