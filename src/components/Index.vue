@@ -8,7 +8,7 @@
         <a class="p-2 text-dark" href="#">Support</a>
         <a class="p-2 text-dark" href="#">Pricing</a>
       </nav>
-      <a class="btn btn-outline-primary" href="/login" v-show="!login">log in</a>
+      <a class="btn btn-outline-primary" v-show="!login" @click="tologin">log in</a>
       <a class="btn btn-outline-primary" v-show="login" @click="logout">log out</a>
     </div>
 
@@ -83,6 +83,9 @@ export default {
     logout () {
       this.login = false
       console.log(this.login)
+    },
+    tologin () {
+      this.$router.push('/login')
     }
   }
 }
