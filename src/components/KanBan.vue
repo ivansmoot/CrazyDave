@@ -1,15 +1,14 @@
 <template>
   <div id='kanban'>
-    <p style="text-align: center; margin: 0 0 20px">使用 render-content 自定义数据项</p>
+    <p style="text-align: center; margin: 0 0 20px; height: 50px">简单的KanBan</p>
     <div style="text-align: center">
       <el-transfer
-        style="text-align: left; display: inline-block"
+        style="text-align: left; display: inline-block; height: 500px;"
         v-model="value"
         filterable
-        :left-default-checked="[2, 3]"
-        :right-default-checked="[1]"
+        target-order="unshift"
         :render-content="renderFunc"
-        :titles="['Source', 'Target']"
+        :titles="['BugList', '待测试']"
         :button-texts="['到左边', '到右边']"
         :format="{
           noChecked: '${total}',
@@ -17,18 +16,51 @@
         }"
         @change="handleChange"
         :data="data">
-        <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
+        <!-- <el-button class="transfer-footer" slot="left-footer" style="width: 50px">+</el-button> -->
+        <el-popover
+          placement="top"
+          width="160"
+          v-model="visible"
+          cclass="transfer-footer"
+          slot="left-footer">
+
+          <div style="margin: 20px 0;"></div>
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 4}"
+            placeholder="请输入内容"
+            v-model="textarea">
+          </el-input>
+
+          <div style="text-align: right; margin: 0">
+            <el-button size="mini" type="text" @click="visible = false">取消</el-button>
+            <el-button type="primary" size="mini" @click="pushdata">确定</el-button>
+          </div>
+          <el-button slot="reference">+</el-button>
+        </el-popover>
         <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
       </el-transfer>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style>
 .transfer-footer {
     margin-left: 20px;
     padding: 6px 5px;
   }
+
+.el-transfer-panel {
+    width: 300px;
+}
+
+.el-transfer-panel__body {
+    height: 400px;
+}
+
+.el-transfer-panel__list.is-filterable{
+    height: 328px;
+}
 </style>
 
 <script>
@@ -44,24 +76,30 @@ export default {
       //     disabled: i % 4 === 0
       //   })
       // }
-      data.push({
-        key: 1,
-        label: '这是第一个'
-      })
       return data
     }
     return {
       data: generateData(),
-      value: [1],
-      value4: [1],
+      value: [0],
       renderFunc (h, option) {
         return <span>{ option.key } - { option.label }</span>
-      }
+      },
+      visible: false,
+      textarea: '',
+      keynum: 1
     }
   },
   methods: {
     handleChange (value, direction, movedKeys) {
       console.log(value, direction, movedKeys)
+    },
+    pushdata () {
+      this.visible = false
+      this.data.push({
+        key: this.keynum++,
+        label: this.textarea
+      })
+      this.textarea = null
     }
   }
 }
