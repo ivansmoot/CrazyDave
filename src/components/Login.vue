@@ -1,7 +1,7 @@
 <template>
   <div id="app4" class="mydiv">
     <div class="text-center mb-4" v-show="dialog_visible">
-      <img class="mb-4" src="../../public/img/bootstrap-solid.svg" alt="" width="72" height="72">
+      <img class="mb-4" src="../../public/img/k8s-logo.png" alt="">
       <h1 class="h3 mb-3 font-weight-normal">登录</h1>
       <p>这是目前测试的登录页面，<br>引入了bootstrap的Floating labels组件</p>
     </div>
