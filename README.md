@@ -31,3 +31,14 @@
 > sudo docker pull registry.cn-qingdao.aliyuncs.com/ivansmoot/devops_webpack:[镜像版本号] </br>
 > 请勿push镜像到阿里云 </br>
 > 开发人员打的tag格式应为release-vX.X.X(例：release-v1.0.0)，否则无法触发阿里云的自动构建
+
+## 其他你可能用到的命令
+> 清空文件下的git：rm -rf .git/ </br>
+> 修改镜像名：docker tag 当前镜像名 目标镜像名 然后删除原有镜像即可 </br>
+> 升级npm：npm i -g npm </br>
+> 如升级报错，可尝试 cnpm i -g npm 后重新升级 </br>
+> npm install XX : </br>
+> -P：即--save-prod，下载至dependencies，生产环境 </br>
+> -D：即--save-dev，下载至devDependencies，开发环境 </br>
+> npm查看当前项目的包：npm list --depth=0 </br>
+> npm查看全局的包: npm list --depth=0 -g </br>

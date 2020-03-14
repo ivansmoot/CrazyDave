@@ -26,6 +26,9 @@
       <el-form-item label="验证码" prop="checkcode">
         <el-input v-model="ruleForm.checkcode" style="width: 300px"></el-input>
       </el-form-item>
+      <div style="position:absolute;right:40px;bottom:210px;">
+        <el-button type="primary" round @click="creatCode" >{{code}}</el-button>
+      </div>
     </el-form>
 
     <!-- <div class="form-label-group short" v-show="dialog_visible">
@@ -33,9 +36,9 @@
       <label for="inputPassword">验证码</label>
     </div> -->
 
-    <div>
-      <el-button type="primary" round class="thiscode" @click="creatCode" >{{code}}</el-button>
-    </div>
+    <!-- <div class="thiscode">
+      <el-button type="primary" round @click="creatCode" >{{code}}</el-button>
+    </div> -->
 
     <div class="checkbox mb-3" v-show="dialog_visible">
       <label style="margin-left: 20px">
@@ -86,16 +89,17 @@
 }
 .short{
   /* float: left; */
-  width: 300px;
+  /* width: 300px; */
   /* overflow:hidden;
   position:relative; */
 }
 .thiscode{
-  float: right;
-  left: 320px;
-  top: 357px;
-  overflow: hidden;
-  position: absolute;
+  /* float: right; */
+  /* left: 320px; */
+  /* top: 357px; */
+  /* top : 657px; */
+  /* overflow: hidden; */
+  /* position: absolute; */
 }
 .left {
   float: left;
