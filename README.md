@@ -19,8 +19,9 @@
 > npm run build 将项目打包进dist文件夹 </br>
 > git add . </br>
 > git commit -m 'your notice' </br>
-> git tag -a release-vX.X.X </br>
-> git push -m 'your notice' --tags
+> git tag -a release-vX.X.X -m 'your notice' </br>
+> git remote add origin https://github.com/ivansmoot/theoutside.git </br>
+> git push origin master --tags
 
 
 ## Build Step
