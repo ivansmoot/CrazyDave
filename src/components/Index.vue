@@ -6,7 +6,7 @@
         <a class="p-2 text-dark" href="#">Features</a>
         <a class="p-2 text-dark" href="#">Enterprise</a>
         <a class="p-2 text-dark" href="#">Support</a>
-        <a class="p-2 text-dark" href="#">Pricing</a>
+        <a class="p-2 text-dark" href="chat">Chat</a>
       </nav>
       <a class="btn btn-outline-primary" v-show="!login" @click="tologin">log in</a>
       <a class="btn btn-outline-primary" v-show="login" @click="logout">log out</a>
