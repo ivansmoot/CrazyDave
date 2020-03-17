@@ -6,7 +6,7 @@
         stripe
         style="width: 100%">
         <el-table-column
-          prop="id"
+          prop="username"
           label="ID"
           width="180">
         </el-table-column>
@@ -26,7 +26,7 @@
         layout="prev, pager, next"
         :page-size="pagesize"
         :total="this.filterInfs.length"
-        style="position:absolute; top:400px; left:220px">
+        style="position:absolute; top:400px; left:180px">
       </el-pagination>
     </div>
     <p></p>
@@ -40,10 +40,11 @@
       maxlength="140"
       show-word-limit
       style="width: 600px;"
+      @keyup.enter.native="pushContent()"
       >
       </el-input>
       <div style="position:relative; left:520px; top:15px">
-        <el-button type="primary" round>发表</el-button>
+        <el-button type="primary" round @click="pushContent">发表</el-button>
       </div>
     </div>
   </div>
@@ -54,27 +55,30 @@
 </style>
 
 <script>
+import { request } from '../network/request'
+import Vue from 'vue'
+import qs from 'qs'
+Vue.prototype.$qs = qs
 export default {
   name: 'chat',
   data () {
     return {
       textarea: '',
-      pagesize: 2,
+      pagesize: 6,
       currentPage: 1,
-      filterInfs: [{
-        id: '1',
-        date: '1',
-        content: '1'
-      }, {
-        id: '2',
-        date: '2',
-        content: '2'
-      }, {
-        id: '3',
-        date: '3',
-        content: '3'
-      }]
+      filterInfs: []
     }
+  },
+  mounted () {
+    request({
+      url: '/content'
+    })
+      .then(res => {
+        this.filterInfs = res.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   computed: {
     tableData () {
@@ -87,6 +91,65 @@ export default {
   methods: {
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
+    },
+    randomString (len) {
+      len = len || 32
+      var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+      var maxPos = $chars.length
+      var pwd = ''
+      for (let i = 0; i < len; i++) {
+        pwd += $chars.charAt(Math.floor(Math.random() * (maxPos + 1)))
+      }
+      return pwd
+    },
+    getdate () {
+      const date = new Date()
+      const year = date.getFullYear()
+      let month = date.getMonth()
+      let day = date.getDate()
+      let hour = date.getHours()
+      let minutes = date.getMinutes()
+      let seconds = date.getSeconds()
+      if (month < 10) {
+        month = '0' + month
+      }
+      if (day < 10) {
+        day = '0' + day
+      }
+      if (hour < 10) {
+        hour = '0' + hour
+      }
+      if (minutes < 10) {
+        minutes = '0' + minutes
+      }
+      if (day < 10) {
+        seconds = '0' + seconds
+      }
+      const contentDate = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds
+      return contentDate
+    },
+    pushContent () {
+      const postData = this.$qs.stringify({
+        id: this.randomString(32),
+        username: '奈德史塔克',
+        date: this.getdate(),
+        content: this.textarea
+      })
+      request({
+        method: 'post',
+        url: '/content',
+        data: postData
+      }).then((res) => {
+        console.log(res)
+      })
+      request({
+        url: '/content'
+      }).then(res => {
+        this.filterInfs = res.data
+      }).catch(err => {
+        console.log(err)
+      })
+      this.textarea = ''
     }
   }
 }
