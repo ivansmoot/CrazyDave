@@ -4,6 +4,7 @@ import firstpage from '../components/FirstPage.vue'
 import login from '../components/Login.vue'
 import kanban from '../components/KanBan.vue'
 import chat from '../components/Chat.vue'
+import ranjin from '../components/RanJin.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,8 @@ const router = new VueRouter({
     { path: '/firstpage', component: firstpage },
     { path: '/login', component: login },
     { path: '/kanban', component: kanban },
-    { path: '/chat', component: chat }
+    { path: '/chat', component: chat },
+    { path: '/ranjin', component: ranjin }
   ]
 })
 

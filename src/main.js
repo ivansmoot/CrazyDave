@@ -7,9 +7,15 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import index from './components/Index.vue'
 import router from './router/index.js'
+import myCharts from './store/myCharts'
+// import echarts from 'echarts'
+// import ECharts from 'vue-echarts'
+Vue.use(myCharts)
 // import login from './components/Login.vue'
 
 Vue.config.productionTip = false
+// Vue.use(echarts)
+// Vue.use(ECharts)
 Vue.use(ElementUI)
 
 new Vue({

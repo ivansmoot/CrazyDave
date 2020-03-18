@@ -7,6 +7,8 @@
         v-model="value"
         filterable
         target-order="original"
+        @left-check-change="leftCheckChange"
+        @right-check-change="rightCheckChange"
         :render-content="renderFunc"
         :titles="['BugList', '待测试']"
         :button-texts="['到左边', '到右边']"
@@ -45,10 +47,10 @@
           v-model="visible1"
           cclass="transfer-footer"
           slot="right-footer">
-            <p>这是一段内容这是一段内容确定删除吗？</p>
+            <p>确认删除选中的项吗？</p>
             <div style="text-align: right; margin: 0">
               <el-button size="mini" type="text" @click="visible1 = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="visible1 = false">确定</el-button>
+              <el-button type="primary" size="mini" @click="deleteItems">确定</el-button>
             </div>
           <el-button slot="reference">-</el-button>
         </el-popover>
@@ -93,7 +95,9 @@ export default {
       visible: false,
       visible1: false,
       textarea: '',
-      keynum: 1
+      keynum: 1,
+      leftchoosen: [],
+      rightchoosen: []
     }
   },
   mounted () {
@@ -108,7 +112,7 @@ export default {
           }
         }
         // this.data = res.data
-        this.keynum = res.data.length + 1
+        this.keynum = this.findMaxKey(this.data) + 1
       })
       .catch(err => {
         console.log(err)
@@ -176,6 +180,45 @@ export default {
       }
       return pwd
     },
+    findMaxKey (data) {
+      let max = 0
+      for (let i = 0; i < data.length; i++) {
+        if (max < parseInt(data[i].key)) {
+          max = parseInt(data[i].key)
+        }
+      }
+      return max
+    },
+    leftCheckChange (key) {
+      console.log('点了一下左边')
+      for (let i = 0; i < key.length; i++) {
+        if (this.leftchoosen.indexOf(key[i]) === -1) {
+          this.leftchoosen.push(key[i])
+        }
+      }
+      for (let j = 0; j < this.leftchoosen.length; j++) {
+        if (key.indexOf(this.leftchoosen[j]) === -1) {
+          this.leftchoosen.splice(j, 1)
+        }
+      }
+      console.log('现在左边有')
+      console.log(this.leftchoosen)
+    },
+    rightCheckChange (key) {
+      console.log('点了一下右边')
+      for (let i = 0; i < key.length; i++) {
+        if (this.rightchoosen.indexOf(key[i]) === -1) {
+          this.rightchoosen.push(key[i])
+        }
+      }
+      for (let j = 0; j < this.rightchoosen.length; j++) {
+        if (key.indexOf(this.rightchoosen[j]) === -1) {
+          this.rightchoosen.splice(j, 1)
+        }
+      }
+      console.log('现在右边有')
+      console.log(this.rightchoosen)
+    },
     pushdata () {
       this.visible = false
       // this.data.push({
@@ -199,11 +242,44 @@ export default {
         url: '/kanban'
       }).then(res => {
         this.data = res.data
-        this.keynum = res.data.length + 1
+        this.keynum = this.findMaxKey(this.data) + 1
       }).catch(err => {
         console.log(err)
       })
       this.textarea = null
+    },
+    deleteItems () {
+      this.visible1 = false
+      console.log('左边选了')
+      console.log(this.leftchoosen)
+      console.log('右边选了')
+      console.log(this.rightchoosen)
+      const shouldBeDeleted = this.leftchoosen.concat(this.rightchoosen)
+      console.log('合并')
+      console.log(shouldBeDeleted)
+      for (let i = 0; i < shouldBeDeleted.length; i++) {
+        for (let j = 0; j < this.data.length; j++) {
+          if (this.data[j].key === shouldBeDeleted[i]) {
+            console.log('找到被删除的了')
+            request({
+              method: 'delete',
+              url: '/kanban/' + this.data[j].id
+            }).then((res) => {
+              console.log(res)
+            })
+          }
+        }
+      }
+      request({
+        url: '/kanban'
+      }).then(res => {
+        this.data = res.data
+        this.keynum = this.findMaxKey(this.data) + 1
+      }).catch(err => {
+        console.log(err)
+      })
+      this.leftchoosen = []
+      this.rightchoosen = []
     }
   }
 }

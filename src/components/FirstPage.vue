@@ -25,11 +25,11 @@
   <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
     <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
       <div class="my-3 py-3">
-        <h2 class="display-5">What is Devops?</h2>
-        <p class="lead">Development + Operations + QA</p>
+        <h2 class="display-5">燃尽图</h2>
+        <el-link @click="toRanJin">点此打开燃尽图<i class="el-icon-view el-icon--right"></i> </el-link>
       </div>
       <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-        <img src="../../public/img/devops.jpg" style="width:60%;height:100%" />
+        <!-- <img src="../../public/img/devops.jpg" style="width:60%;height:100%" /> -->
       </div>
     </div>
     <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
@@ -175,6 +175,9 @@ export default {
     },
     toKanBan () {
       this.$router.push('/kanban')
+    },
+    toRanJin () {
+      this.$router.push('/ranjin')
     }
   }
 }

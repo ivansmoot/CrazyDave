@@ -93,58 +93,22 @@
   ],
   "kanban": [
     {
-      "id": "WpcnDysnglibq8dLrtbjCF44Na0TGyB",
+      "id": "IiTtKwvghX0bpmiUMOOjW8ZjAPpFzGYM",
       "key": "1",
-      "label": "左边第一个\n",
+      "label": "s",
       "location": "left"
     },
     {
-      "id": "qhEXqxLZ34FyN6GPKXvamFboXUSb9Ifo",
+      "id": "liNf97YzIYoF3ENdu7IK3m9Kt7dg7FwI",
       "key": "2",
-      "label": "右边第一个\n",
-      "location": "right"
+      "label": "是试试是是是是是是是是是是是是是\n",
+      "location": "left"
     },
     {
-      "id": "RQz6jfSMsj0lXwvu6jyqJdlD2W8Qye00",
+      "id": "m3Lv3XbQ0nwf3o6DGno6FoB2Q8WS9j6",
       "key": "3",
-      "label": "左边第二个",
+      "label": "呼呼呼呼呼呼好好好好好好好好哈哈 哈哈好好好好好好好\n",
       "location": "left"
-    },
-    {
-      "id": "4XFWXztiMgMm8RPkLllcJxfTsZRMLwDc",
-      "key": "4",
-      "label": "右边第二个",
-      "location": "right"
-    },
-    {
-      "id": "AoXlxrWt354M2Or42TXat8YWEs9nKggg",
-      "key": "5",
-      "label": "左边第三个",
-      "location": "left"
-    },
-    {
-      "id": "bZ4J0tyLl79ZP43sgXcS0vIuCgzueeY8",
-      "key": "6",
-      "label": "右边第三个\n",
-      "location": "right"
-    },
-    {
-      "id": "f6OZ8CIDnZZbIALKGwuUYyhAgeHI8ps",
-      "key": "7",
-      "label": "右边第四个\n",
-      "location": "right"
-    },
-    {
-      "id": "aaob7pFLD2PHWvGeeq2zv1B8UN60VE",
-      "key": "8",
-      "label": "左边第四个\n",
-      "location": "left"
-    },
-    {
-      "id": "bRH1AwmECY2zdyO339xNFZrigqEYWod",
-      "key": "9",
-      "label": "右边第五个\n",
-      "location": "right"
     }
   ]
 }
