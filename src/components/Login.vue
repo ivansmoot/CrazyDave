@@ -24,7 +24,7 @@
         <el-input type="password" v-model="ruleForm.pass" style="width: 400px" placeholder="password"></el-input>
       </el-form-item>
       <el-form-item label="验证码" prop="checkcode">
-        <el-input v-model="ruleForm.checkcode" style="width: 300px"></el-input>
+        <el-input id="codeinput" v-model="ruleForm.checkcode" style="width: 300px" @keyup.enter.native="jump()"></el-input>
       </el-form-item>
       <div style="position:absolute;right:40px;bottom:210px;">
         <el-button type="primary" round @click="creatCode" >{{code}}</el-button>
@@ -56,7 +56,8 @@
   </div>
 </template>
 
-<style scoped src="../../public/bootstrap-4.3.1/site/docs/4.3/examples/floating-labels/floating-labels.css">
+<!-- style scoped src="../../public/bootstrap-4.3.1/site/docs/4.3/examples/floating-labels/floating-labels.css" -->
+<style scoped>
 /* src="../../public/bootstrap-4.3.1/site/docs/4.3/examples/floating-labels/floating-labels.css" */
 .bd-placeholder-img {
   font-size: 1.125rem;
@@ -185,6 +186,8 @@ export default {
   methods: {
     jump () {
       console.log('点击成功')
+      const cinput = document.getElementById('codeinput')
+      cinput.blur()
       if (this.ruleForm.account === this.username1 && this.ruleForm.pass === this.password1) {
         if (this.code === this.ruleForm.checkcode) {
           this.$alert('登陆成功', '恭喜你', {

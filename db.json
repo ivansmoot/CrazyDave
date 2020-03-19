@@ -102,12 +102,18 @@
       "id": "liNf97YzIYoF3ENdu7IK3m9Kt7dg7FwI",
       "key": "2",
       "label": "是试试是是是是是是是是是是是是是\n",
-      "location": "left"
+      "location": "right"
     },
     {
       "id": "m3Lv3XbQ0nwf3o6DGno6FoB2Q8WS9j6",
       "key": "3",
       "label": "呼呼呼呼呼呼好好好好好好好好哈哈 哈哈好好好好好好好\n",
+      "location": "left"
+    },
+    {
+      "id": "2EgydBtpf3rIVFUV7VXTSXYf7R1CNsB",
+      "key": "4",
+      "label": "ceshi \n",
       "location": "left"
     }
   ]
