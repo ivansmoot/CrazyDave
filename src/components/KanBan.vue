@@ -137,16 +137,6 @@ export default {
             }
           }
         }
-        // const postData3 = this.$qs.stringify({
-        //   location: 'right'
-        // })
-        // request({
-        //   method: 'patch',
-        //   url: '/kanban/WpcnDysnglibq8dLrtbjCF44Na0TGyB',
-        //   data: postData3
-        // }).then((res) => {
-        //   console.log(res)
-        // })
       }
       if (direction === 'left') {
         for (let i = 0; i < movedKeys.length; i++) {
@@ -221,10 +211,6 @@ export default {
     },
     pushdata () {
       this.visible = false
-      // this.data.push({
-      //   key: this.keynum++,
-      //   label: this.textarea
-      // })
       const postData = this.$qs.stringify({
         id: this.randomString(32),
         key: this.keynum,

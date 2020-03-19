@@ -6,8 +6,6 @@
       <p class="lead font-weight-normal">DevOps is a set of practices that combines software
         development (Dev) and information-technology operations (Ops) which aims to shorten the systems
         development life cycle and provide continuous delivery with high software quality.</p>
-      <!-- <a class="btn btn-outline-secondary" href="https://github.com/ivansmoot">My github</a>
-      <a class="thisbtn" href="#">test</a> -->
       <el-popover
         placement="top-start"
         title="页面跳转"
@@ -29,7 +27,6 @@
         <el-link @click="toRanJin">点此打开燃尽图<i class="el-icon-view el-icon--right"></i> </el-link>
       </div>
       <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-        <!-- <img src="../../public/img/devops.jpg" style="width:60%;height:100%" /> -->
       </div>
     </div>
     <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
@@ -64,10 +61,6 @@
   max-width: 960px;
 }
 
-/*
- * Custom translucent site header
- */
-
 .site-header {
   background-color: rgba(0, 0, 0, .85);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -81,10 +74,6 @@
   color: #fff;
   text-decoration: none;
 }
-
-/*
- * Dummy devices (replace them with your own or something else entirely!)
- */
 
 .product-device {
   position: absolute;
@@ -116,10 +105,6 @@
   left: 5%;
   background-color: #e5e5e5;
 }
-
-/*
- * Extra utilities
- */
 
 .flex-equal > * {
   -ms-flex: 1;
