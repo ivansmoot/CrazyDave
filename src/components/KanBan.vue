@@ -18,7 +18,6 @@
         }"
         @change="handleChange"
         :data="data">
-        <!-- <el-button class="transfer-footer" slot="left-footer" style="width: 50px">+</el-button> -->
         <el-popover
           placement="top"
           width="160"
@@ -87,17 +86,17 @@ export default {
   name: 'kanban',
   data () {
     return {
-      data: [],
+      data: [], // 这是全部的数据，包括右边的
       value: [], // 这玩意是保存哪些在右边的
       renderFunc (h, option) {
         return <span>{ option.key } - { option.label }</span>
-      },
+      }, // 就是把key和label连起来
       visible: false,
-      visible1: false,
+      visible1: false, // 这俩是弹出是否显示的参数
       textarea: '',
-      keynum: 1,
-      leftchoosen: [],
-      rightchoosen: []
+      keynum: 1, // 存放key，这个值很重要，要算好新加的到底应该是第几个
+      leftchoosen: [], // 存放左边哪几个key被选中了
+      rightchoosen: [] // 存放右边哪几个key被选中了
     }
   },
   mounted () {
@@ -106,13 +105,13 @@ export default {
     })
       .then(res => {
         this.data = res.data
-        for (let i = 0; i < res.data.length; i++) {
+        for (let i = 0; i < res.data.length; i++) { // 判断获取的数据哪些是左边哪些是右边
           if (res.data[i].location === 'right') {
             this.value.push(res.data[i].key)
           }
         }
         // this.data = res.data
-        this.keynum = this.findMaxKey(this.data) + 1
+        this.keynum = this.findMaxKey(this.data) + 1 // 算一下新加的key应该是多少
       })
       .catch(err => {
         console.log(err)
@@ -120,14 +119,14 @@ export default {
   },
   methods: {
     handleChange (value, direction, movedKeys) {
-      if (direction === 'right') {
-        for (let i = 0; i < movedKeys.length; i++) {
+      if (direction === 'right') { // 点击‘到右边’按钮时的事件
+        for (let i = 0; i < movedKeys.length; i++) { // 把被移到右边的数据的location全部改为right，意思是这些应该是在右边的
           for (let j = 0; j < this.data.length; j++) {
             if (this.data[j].key === movedKeys[i]) {
               const postData3 = this.$qs.stringify({
                 location: 'right'
               })
-              request({
+              request({ // patch方法修改数据，把db.json中的数据更新一下
                 method: 'patch',
                 url: '/kanban/' + this.data[j].id,
                 data: postData3
@@ -138,14 +137,14 @@ export default {
           }
         }
       }
-      if (direction === 'left') {
-        for (let i = 0; i < movedKeys.length; i++) {
+      if (direction === 'left') { // 点击‘到左边’按钮时的事件
+        for (let i = 0; i < movedKeys.length; i++) { // 把被移到左边的数据的location全部改为left，意思是这些应该是在左边的
           for (let j = 0; j < this.data.length; j++) {
             if (this.data[j].key === movedKeys[i]) {
               const postData4 = this.$qs.stringify({
                 location: 'left'
               })
-              request({
+              request({ // patch方法修改数据，把db.json中的数据更新一下
                 method: 'patch',
                 url: '/kanban/' + this.data[j].id,
                 data: postData4
@@ -157,10 +156,10 @@ export default {
         }
       }
     },
-    handleCurrentChange (currentPage) {
+    handleCurrentChange (currentPage) { // 这玩意到底是干啥的
       this.currentPage = currentPage
     },
-    randomString (len) {
+    randomString (len) { // 同样的方法生成流水号
       len = len || 32
       var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
       var maxPos = $chars.length
@@ -170,7 +169,7 @@ export default {
       }
       return pwd
     },
-    findMaxKey (data) {
+    findMaxKey (data) { // 找到获取的数据中，最大的key是多少，以便判断新加的key应该是多少
       let max = 0
       for (let i = 0; i < data.length; i++) {
         if (max < parseInt(data[i].key)) {
@@ -179,52 +178,46 @@ export default {
       }
       return max
     },
-    leftCheckChange (key) {
-      console.log('点了一下左边')
-      for (let i = 0; i < key.length; i++) {
+    leftCheckChange (key) { // 当左边有数据被选中时，更新leftchoosen，实时为所有左边的key
+      for (let i = 0; i < key.length; i++) { // 如果leftchoosen中没有这个key，就加进去(防止key被重复加入)
         if (this.leftchoosen.indexOf(key[i]) === -1) {
           this.leftchoosen.push(key[i])
         }
       }
-      for (let j = 0; j < this.leftchoosen.length; j++) {
+      for (let j = 0; j < this.leftchoosen.length; j++) { // 如果leftchoosen中有这个key，但是被选中的没有，说明选中后又取消了，要删除
         if (key.indexOf(this.leftchoosen[j]) === -1) {
           this.leftchoosen.splice(j, 1)
         }
       }
-      console.log('现在左边有')
-      console.log(this.leftchoosen)
     },
-    rightCheckChange (key) {
-      console.log('点了一下右边')
-      for (let i = 0; i < key.length; i++) {
+    rightCheckChange (key) { // 当右边有数据被选中时，更新rightchoosen，实时为所有右边的key
+      for (let i = 0; i < key.length; i++) { // 如果rightchoosen中没有这个key，就加进去(防止key被重复加入)
         if (this.rightchoosen.indexOf(key[i]) === -1) {
           this.rightchoosen.push(key[i])
         }
       }
-      for (let j = 0; j < this.rightchoosen.length; j++) {
+      for (let j = 0; j < this.rightchoosen.length; j++) { // 如果rightchoosen中有这个key，但是被选中的没有，说明选中后又取消了，要删除
         if (key.indexOf(this.rightchoosen[j]) === -1) {
           this.rightchoosen.splice(j, 1)
         }
       }
-      console.log('现在右边有')
-      console.log(this.rightchoosen)
     },
     pushdata () {
       this.visible = false
-      const postData = this.$qs.stringify({
-        id: this.randomString(32),
-        key: this.keynum,
-        label: this.textarea,
-        location: 'left'
+      const postData = this.$qs.stringify({ // 需要被上传的数据
+        id: this.randomString(32), // 仍然是32位的流水号
+        key: this.keynum, // 应该是第几个
+        label: this.textarea, // 文本框的数据
+        location: 'left' // 默认就是在左边的
       })
-      request({
+      request({ // 上传
         method: 'post',
         url: '/kanban',
         data: postData
       }).then((res) => {
         console.log(res)
       })
-      request({
+      request({ // 重新获取数据，让上面刷新出来刚刚加的
         url: '/kanban'
       }).then(res => {
         this.data = res.data
@@ -234,19 +227,11 @@ export default {
       })
       this.textarea = null
     },
-    deleteItems () {
-      this.visible1 = false
-      console.log('左边选了')
-      console.log(this.leftchoosen)
-      console.log('右边选了')
-      console.log(this.rightchoosen)
-      const shouldBeDeleted = this.leftchoosen.concat(this.rightchoosen)
-      console.log('合并')
-      console.log(shouldBeDeleted)
+    deleteItems () { // 数据删除方法
+      const shouldBeDeleted = this.leftchoosen.concat(this.rightchoosen) // 被删除的就是左边和右边所有被选中的项
       for (let i = 0; i < shouldBeDeleted.length; i++) {
         for (let j = 0; j < this.data.length; j++) {
-          if (this.data[j].key === shouldBeDeleted[i]) {
-            console.log('找到被删除的了')
+          if (this.data[j].key === shouldBeDeleted[i]) { // 根据被选中的key找到被选中项的id，为每一个项发送delete请求
             request({
               method: 'delete',
               url: '/kanban/' + this.data[j].id
@@ -256,7 +241,7 @@ export default {
           }
         }
       }
-      request({
+      request({ // 删除后也要重新刷一下数据
         url: '/kanban'
       }).then(res => {
         this.data = res.data

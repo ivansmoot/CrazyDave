@@ -43,3 +43,5 @@ export default {
   }
 }
 </script>
+
+<!-- Echarts真的好难用，还是Vue-echatrs好用，感谢鱿鱼丝 -->

@@ -78,24 +78,19 @@ export default {
     request({
       url: '/users'
     })
-      .then(res => {
-        console.log(res.data[0].account)
+      .then(res => { // 很尴尬的登陆方法，有点傻逼
         this.username1 = res.data[0].account
         this.password1 = res.data[0].password
-        console.log(this.username1)
-        console.log(this.password1)
-        console.log(res)
       })
       .catch(err => {
         console.log(err)
       })
   },
-  created () {
+  created () { // 页面出来的时候就要有验证码
     this.creatCode()
   },
   methods: {
-    jump () {
-      console.log('点击成功')
+    jump () { // 判断输入的对不对啥的，balabala
       const cinput = document.getElementById('codeinput')
       cinput.blur()
       if (this.ruleForm.account === this.username1 && this.ruleForm.pass === this.password1) {
@@ -120,7 +115,7 @@ export default {
         this.creatCode()
       }
     },
-    creatCode () {
+    creatCode () { // 生成随机验证码的方法
       // 先清空验证码的输入
       this.code = ''
       this.checkCode = ''

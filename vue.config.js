@@ -1,6 +1,4 @@
 module.exports = {
-  // 选项...
-  // devtool: 'eval-source-map',//开发调试
   devServer: {
     proxy:{
       '/apis': {//代理api
@@ -12,7 +10,7 @@ module.exports = {
       }
     }
   },
-  transpileDependencies: [
+  transpileDependencies: [ // 这是Vue-echarts官方文档给出的Webpack3配置需要，否则Vue-echarts没法用
     'vue-echarts',
     'resize-detector'
   ]

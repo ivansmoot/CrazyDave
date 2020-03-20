@@ -9,6 +9,7 @@ import ranjin from '../components/RanJin.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+  // history模式url里没有#，要注意页面跳转用this.$router.push()方法，否则打出来的dist文件找不到文件，会报404
   mode: 'history',
   routes: [
     { path: '/', redirect: '/firstpage' },
@@ -19,8 +20,12 @@ const router = new VueRouter({
     { path: '/ranjin', component: ranjin }
   ],
   scrollBehavior (to, from, savedPosition) {
+    // 这个是为了每次跳转都能跳回页面顶部
     return { x: 0, y: 0 }
   }
 })
 
 export default router
+
+// 路由文件，首先引入了被路由组件，当路由地址为‘/’时直接给跳转到‘/firstpage’里，而'.firstpage'又对应firstpage组件，
+// 即用FirstPage.vue组件替换Index.vue中间的router-view，其他路由同理

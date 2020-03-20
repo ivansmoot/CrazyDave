@@ -64,7 +64,7 @@ export default {
   data () {
     return {
       textarea: '',
-      pagesize: 6,
+      pagesize: 6, // 每页最多显示6条数据
       currentPage: 1,
       filterInfs: []
     }
@@ -74,14 +74,14 @@ export default {
       url: '/content'
     })
       .then(res => {
-        this.filterInfs = res.data
+        this.filterInfs = res.data // 把从db.json获取到的res.data数据赋值给filterInfs
       })
       .catch(err => {
         console.log(err)
       })
   },
   computed: {
-    tableData () {
+    tableData () { // 表格内容就是绑定的这个叫tableData的计算属性的返回值，这个值根据filterInfs切片得到
       return this.filterInfs.slice(
         (this.currentPage - 1) * this.pagesize,
         this.currentPage * this.pagesize
@@ -89,10 +89,10 @@ export default {
     }
   },
   methods: {
-    handleCurrentChange (currentPage) {
+    handleCurrentChange (currentPage) { // 这个我也不知道是干嘛的，好像不是很重要
       this.currentPage = currentPage
     },
-    randomString (len) {
+    randomString (len) { // 创建流水号方法
       len = len || 32
       var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
       var maxPos = $chars.length
@@ -102,7 +102,7 @@ export default {
       }
       return pwd
     },
-    getdate () {
+    getdate () { // 格式化日期
       const date = new Date()
       const year = date.getFullYear()
       let month = date.getMonth()
@@ -128,28 +128,28 @@ export default {
       const contentDate = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds
       return contentDate
     },
-    pushContent () {
+    pushContent () { // 准备发送的内容
       const postData = this.$qs.stringify({
-        id: this.randomString(32),
-        username: '奈德史塔克',
-        date: this.getdate(),
-        content: this.textarea
+        id: this.randomString(32), // 生成一个32位流水号(是不是有点长啊？)
+        username: '奈德史塔克', // username目前是写死的
+        date: this.getdate(), // 时间就是当前时间
+        content: this.textarea // 获取评论框中的内容
       })
-      request({
+      request({ // 把文本框的内容发送给db.json
         method: 'post',
         url: '/content',
         data: postData
       }).then((res) => {
         console.log(res)
       })
-      request({
+      request({ // 发给db.json后要重新接受一下db.json的文件，让刚刚写的评论马上在上面刷出来
         url: '/content'
       }).then(res => {
         this.filterInfs = res.data
       }).catch(err => {
         console.log(err)
       })
-      this.textarea = ''
+      this.textarea = '' // 重置文本框的内容为空，不然显得很傻逼
     }
   }
 }

@@ -109,6 +109,8 @@ export default {
 }
 </script>
 
+<!-- 这个css覆盖了bootstrap里的样式，就是为了改一下login和logout按钮hover时的颜色，
+    原来的颜色实在是太丑了，这里用了Element的主题颜色 -->
 <style>
 .btn-outline-primary:hover {
   color: #fff;
@@ -116,3 +118,8 @@ export default {
   border-color: #409EFF;
 }
 </style>
+
+<!-- Index.vue组件为页面上部导航条和页脚的显示，中间用一个router-view的标签展示内容，也就是说，
+    所有其他组件的内容都会被替换进这个router-view中，所以每个页面的页头和页脚都是一致的
+    @transfer="islogin"绑定一个参数用来进行父子组件的传值，Login.vue把这个值传过来，
+    让Index.vue判断登陆情况。具体的router规则在router文件夹下的index.js中 -->

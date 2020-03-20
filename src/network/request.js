@@ -6,3 +6,6 @@ export function request (config) {
   })
   return instance1(config)
 }
+
+// 这是项目的网络配置，引入了axios，鱿鱼丝推荐，必属精品
+// 暴露出request，这里的/apis在vue.config.js暴露出
