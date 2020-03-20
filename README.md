@@ -9,7 +9,7 @@
 
 ## Code Step
 > git init </br>
-> git pull https://github.com/ivansmoot/theoutside.git </br>
+> git pull https://github.com/ivansmoot/CrazyDave.git </br>
 > npm install 下载依赖 </br>
 > npm run js 启动后端模拟端口 </br>
 > npm run serve 启动项目 </br>
@@ -20,7 +20,7 @@
 > git add . </br>
 > git commit -m 'your notice' </br>
 > git tag -a release-vX.X.X -m 'your notice' </br>
-> git remote add origin https://github.com/ivansmoot/theoutside.git </br>
+> git remote add origin https://github.com/ivansmoot/CrazyDave.git </br>
 > git push origin master --tags
 
 
