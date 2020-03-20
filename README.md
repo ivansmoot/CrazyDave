@@ -26,9 +26,9 @@
 
 ## Build Step
 > 登录阿里云 </br>
-> sudo docker login --username=叫纯数字怎么了 registry.cn-qingdao.aliyuncs.com </br>
+> sudo docker login --username=叫纯数字怎么了 registry.cn-shanghai.aliyuncs.com </br>
 > 拉取镜像 </br>
-> sudo docker pull registry.cn-qingdao.aliyuncs.com/ivansmoot/theoutside:[镜像版本号] </br>
+> sudo docker pull registry.cn-shanghai.aliyuncs.com/ivansmoot/crazy-dave:[镜像版本号] </br>
 > docker run -p 8080:80 -d [镜像ID] </br>
 > 请勿push镜像到阿里云 </br>
 > 开发人员打的tag格式应为release-vX.X.X(例：release-v1.0.0)，否则无法触发阿里云的自动构建
