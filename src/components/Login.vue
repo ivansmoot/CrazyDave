@@ -3,7 +3,7 @@
     <div class="text-center mb-4" v-show="dialog_visible">
       <img class="mb-4" src="../../public/img/k8s-logo.png" alt="">
       <h1 class="h3 mb-3 font-weight-normal">登录</h1>
-      <p>这是目前测试的登录页面，<br>引入了bootstrap的Floating labels组件</p>
+      <p>Be agile</p>
     </div>
 
     <el-form status-icon :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" style="margin-left: -30px">
@@ -14,9 +14,9 @@
         <el-input type="password" v-model="ruleForm.pass" style="width: 400px" placeholder="password"></el-input>
       </el-form-item>
       <el-form-item label="验证码" prop="checkcode">
-        <el-input id="codeinput" v-model="ruleForm.checkcode" style="width: 300px" @keyup.enter.native="jump()"></el-input>
+        <el-input id="codeinput" v-model="ruleForm.checkcode" style="width: 300px" @keyup.enter.native="jump()" placeholder="Verification code"></el-input>
       </el-form-item>
-      <div style="position:absolute;right:40px;bottom:210px;">
+      <div style="position:absolute;right:30px;bottom:237px;">
         <el-button type="primary" round @click="creatCode" >{{code}}</el-button>
       </div>
     </el-form>
@@ -33,20 +33,6 @@
 </template>
 
 <style scoped src="../css/floating-labels.css" >
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
 .mydiv{
   position: absolute;
   top: 20%;
@@ -55,33 +41,6 @@
   width: 500px;
   height: 700px;
   margin: 0 auto;
-}
-.copyright{
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  bottom: -100px;
-}
-.left {
-  float: left;
-  width:960px;
-  height:540px;
-  background-color: gray;
-  overflow:hidden;
-  position:relative;
-}
-.right {
-  float:right;
-  left: 980px;
-  top: 75px;
-  width: 500px;
-  height: 500px;
-  overflow:hidden;
-  position:absolute;
-}
-.bgimg {
-  background-image: url('../../public/img/bgimg.png');
-  background-size: cover;
 }
 </style>
 

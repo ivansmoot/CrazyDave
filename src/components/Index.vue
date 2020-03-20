@@ -81,7 +81,22 @@ export default {
       this.login = info
     },
     logout () {
-      this.login = false
+      this.$confirm('确认退出账号吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '成功退出账号'
+        })
+        this.login = false
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
       console.log(this.login)
     },
     tologin () {
@@ -95,4 +110,9 @@ export default {
 </script>
 
 <style>
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #409EFF;
+  border-color: #409EFF;
+}
 </style>

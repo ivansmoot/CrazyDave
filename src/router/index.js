@@ -17,7 +17,10 @@ const router = new VueRouter({
     { path: '/kanban', component: kanban },
     { path: '/chat', component: chat },
     { path: '/ranjin', component: ranjin }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router
