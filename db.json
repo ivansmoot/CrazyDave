@@ -4,6 +4,11 @@
       "id": "1UE6J3dR7Kk59CiVceoXm7JRZfq5T16",
       "account": "admin",
       "password": "password"
+    },
+    {
+      "id": "mLGar216VhQmwIQsxphv2Q3IKWY1fo0V",
+      "account": "测试账号",
+      "password": "123"
     }
   ],
   "content": [
@@ -90,32 +95,44 @@
       "username": "奈德史塔克",
       "date": "2020-02-17 13:08:25",
       "content": "追，就硬追"
+    },
+    {
+      "id": "HYsrPCP2FIyZVPok3Oj2YqHNHgdv3ig",
+      "username": "测试账号",
+      "date": "2020-02-23 20:03:42",
+      "content": "1"
+    },
+    {
+      "id": "JwihSY4IiLNiKZxvUDcA7V7FfLZoKwZ4",
+      "username": "测试账号",
+      "date": "2020-02-23 20:15:7",
+      "content": "啥？"
     }
   ],
   "kanban": [
     {
       "id": "IiTtKwvghX0bpmiUMOOjW8ZjAPpFzGYM",
       "key": "1",
-      "label": "s",
+      "label": "左边1",
       "location": "left"
     },
     {
       "id": "liNf97YzIYoF3ENdu7IK3m9Kt7dg7FwI",
       "key": "2",
-      "label": "是试试是是是是是是是是是是是是是\n",
+      "label": "右边1",
       "location": "right"
     },
     {
       "id": "m3Lv3XbQ0nwf3o6DGno6FoB2Q8WS9j6",
       "key": "3",
-      "label": "呼呼呼呼呼呼好好好好好好好好哈哈 哈哈好好好好好好好\n",
+      "label": "左边2",
       "location": "left"
     },
     {
       "id": "2EgydBtpf3rIVFUV7VXTSXYf7R1CNsB",
       "key": "4",
-      "label": "ceshi \n",
-      "location": "left"
+      "label": "右边2",
+      "location": "right"
     }
   ]
 }

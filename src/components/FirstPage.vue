@@ -26,7 +26,14 @@
         <h2 class="display-5">燃尽图</h2>
         <el-link @click="toRanJin">点此打开燃尽图<i class="el-icon-view el-icon--right"></i> </el-link>
       </div>
-      <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+      <!-- <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+      </div> -->
+      <div class="demo-image__preview">
+        <el-image
+          style="width: 400px; height: 200px"
+          :src="url"
+          :preview-src-list="srcList">
+        </el-image>
       </div>
     </div>
     <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
@@ -34,7 +41,13 @@
         <h2 class="display-5">Kanban</h2>
         <el-link @click="toKanBan">click here to use a simple Kanban<i class="el-icon-view el-icon--right"></i> </el-link>
       </div>
-      <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+      <div class="demo-image__preview">
+        <el-image
+          style="width: 400px; height: 200px"
+          :src="url2"
+          :preview-src-list="srcList2">
+        </el-image>
+      </div>
     </div>
   </div>
 
@@ -152,6 +165,19 @@ export default {
   name: 'index',
   data () {
     return {
+      url: require('../../public/img/燃尽图-按时完成.png'),
+      srcList: [
+        require('../../public/img/燃尽图-按时完成.png'),
+        require('../../public/img/燃尽图-提前完成.png'),
+        require('../../public/img/燃尽图-未完成.png'),
+        require('../../public/img/燃尽图-落后赶上.png')
+      ],
+      url2: require('../../public/img/看板.jpg'),
+      srcList2: [
+        require('../../public/img/看板.jpg'),
+        require('../../public/img/看板2.png'),
+        require('../../public/img/看板3.png')
+      ]
     }
   },
   methods: {

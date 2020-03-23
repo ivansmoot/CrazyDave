@@ -108,6 +108,7 @@ export default {
             confirmButtonText: '确定'
           })
           this.$emit('transfer', true) // 给父组件传值
+          this.$emit('transfer2', this.ruleForm.account)
           this.$router.push('/')
         } else {
           console.log('wrong password')

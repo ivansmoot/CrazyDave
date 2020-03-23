@@ -66,7 +66,8 @@ export default {
       textarea: '',
       pagesize: 6, // 每页最多显示6条数据
       currentPage: 1,
-      filterInfs: []
+      filterInfs: [],
+      uname: ''
     }
   },
   mounted () {
@@ -81,6 +82,7 @@ export default {
         this.$router.push('/')
       })
     }
+    this.uname = this.$parent.uname
     request({
       url: '/content'
     })
@@ -100,7 +102,7 @@ export default {
     }
   },
   methods: {
-    handleCurrentChange (currentPage) { // 这个我也不知道是干嘛的，好像不是很重要
+    handleCurrentChange (currentPage) {
       this.currentPage = currentPage
     },
     randomString (len) { // 创建流水号方法
@@ -142,7 +144,7 @@ export default {
     pushContent () { // 准备发送的内容
       const postData = this.$qs.stringify({
         id: this.randomString(32), // 生成一个32位流水号(是不是有点长啊？)
-        username: '奈德史塔克', // username目前是写死的
+        username: this.uname, // username根据当前登陆用户来
         date: this.getdate(), // 时间就是当前时间
         content: this.textarea // 获取评论框中的内容
       })
@@ -161,6 +163,7 @@ export default {
         console.log(err)
       })
       this.textarea = '' // 重置文本框的内容为空，不然显得很傻逼
+      this.currentPage = Math.ceil(this.filterInfs.length / this.pagesize)
     }
   }
 }

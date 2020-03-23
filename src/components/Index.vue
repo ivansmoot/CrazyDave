@@ -12,7 +12,7 @@
       <a class="btn btn-outline-primary" v-show="login" @click="logout">log out</a>
     </div>
 
-    <router-view @transfer="islogin">
+    <router-view @transfer="islogin" @transfer2="username">
     </router-view>
 
     <footer class="container py-5" style="position:relative; bottom: 0;">
@@ -70,7 +70,8 @@ export default {
   name: 'index',
   data () {
     return {
-      login: false
+      login: false,
+      uname: ''
     }
   },
   methods: {
@@ -79,6 +80,9 @@ export default {
     },
     islogin (info) {
       this.login = info
+    },
+    username (uname) {
+      this.uname = uname
     },
     logout () {
       this.$confirm('确认退出账号吗？', '提示', {
