@@ -28,9 +28,10 @@
           placeholder="请输入剩余进度"
           prefix-icon="el-icon-search"
           v-model="input2"
-          style="position: absolute; left: 230px">
+          style="position: absolute; left: 230px"
+          @keyup.enter.native="showdate2()">
         </el-input>
-        <el-button type="primary" round @click="showdate"
+        <el-button type="primary" round @click="showdate2"
           style="position: absolute; left: 140px; top: 50px">绘制当前燃尽图</el-button>
       </div>
     </div>
@@ -54,7 +55,7 @@ export default {
       value1: '',
       xData: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       yData: [820, 932, 901, 934, 1290, 1330, 1320],
-      yData2: [920, 1032, 1001, 1034, 1390, 1430, 1420],
+      yData2: [],
       input1: '',
       input2: ''
     }
@@ -101,6 +102,62 @@ export default {
       }
       this.yData.push('0')
       this.drawIt()
+    },
+    judgedate () {
+      const reg = /^[0-9]{4}-[0-9]{2}-[0-9]{2}/
+      if (reg.test()) {
+        return true
+      } else {
+        let flag = false
+        const nday = parseInt(this.input1.substr(8, 2)) // 右边手动填的
+        const nyear = parseInt(this.input1.substr(0, 4))
+        const nmonth = parseInt(this.input1.substr(5, 2))
+
+        const fday = parseInt(this.value1[0].substr(8, 2)) // 左边表格的
+        const lday = parseInt(this.value1[1].substr(8, 2))
+        const fyear = parseInt(this.value1[0].substr(0, 4)) // 左边表格的
+        const lyear = parseInt(this.value1[1].substr(0, 4))
+        const fmonth = parseInt(this.value1[0].substr(5, 2)) // 左边表格的
+        const lmonth = parseInt(this.value1[1].substr(5, 2))
+
+        const date1 = []
+        const date2 = []
+        const date3 = []
+        date1.push(fyear)
+        date1.push(fmonth)
+        date1.push(fday)
+        date2.push(lyear)
+        date2.push(lmonth)
+        date2.push(lday)
+        date3.push(nyear)
+        date3.push(nmonth)
+        date3.push(nday)
+
+        if (date3[0] >= date1[0] && date3[1] >= date1[1] && date3[2] >= date1[2]) {
+          if (date3[0] <= date2[0] && date3[1] <= date2[1] && date3[2] <= date2[2]) {
+            flag = true
+          }
+        }
+        return flag
+      }
+    },
+    showdate2 () {
+      const nday = parseInt(this.input1.substr(8, 2))
+      const nwork = parseInt(this.input2)
+      const daynum = nday - this.xData[0]
+      if (this.judgedate()) {
+        if (daynum < this.yData2.length) {
+          this.yData2[daynum] = nwork
+          this.drawIt()
+        } else {
+          this.yData2[daynum] = nwork
+        }
+      } else {
+        this.$message({
+          message: '你这日期输得有问题啊',
+          type: 'warning'
+        })
+      }
     }
   }
 }
