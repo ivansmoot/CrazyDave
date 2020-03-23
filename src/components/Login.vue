@@ -107,7 +107,7 @@ export default {
           this.$alert('登陆成功', '恭喜你', {
             confirmButtonText: '确定'
           })
-          this.$emit('transfer', true)
+          this.$emit('transfer', true) // 给父组件传值
           this.$router.push('/')
         } else {
           console.log('wrong password')

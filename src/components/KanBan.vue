@@ -1,6 +1,6 @@
 <template>
   <div id='kanban'>
-    <p style="text-align: center; margin: 0 0 20px; height: 50px">a simple KanBan</p>
+    <p style="text-align: center; margin: 0 0 20px; height: 50px">A simple KanBan</p>
     <div style="text-align: center">
       <el-transfer
         style="text-align: left; display: inline-block; height: 500px;"

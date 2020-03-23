@@ -70,6 +70,17 @@ export default {
     }
   },
   mounted () {
+    if (this.$parent.login === false) { // 获取父组件里的登陆信息
+      this.$confirm('该功能需要先登陆', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$router.push('/login')
+      }).catch(() => {
+        this.$router.push('/')
+      })
+    }
     request({
       url: '/content'
     })
