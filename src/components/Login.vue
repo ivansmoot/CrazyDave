@@ -19,6 +19,9 @@
       <div style="position:absolute;right:30px;bottom:237px;">
         <el-button type="primary" round @click="creatCode" >{{code}}</el-button>
       </div>
+      <div style="position:absolute;right:37px;bottom:187px;">
+        <el-link type="info" @click="toRegister">没有账号？前去注册</el-link>
+      </div>
     </el-form>
 
     <div class="checkbox mb-3" v-show="dialog_visible">
@@ -52,10 +55,8 @@ export default {
   data () {
     return {
       dialog_visible: true,
-      username1: 'test',
-      password1: '',
+      data: [],
       code: '',
-      id: '2',
       ruleForm: {
         account: '',
         pass: '',
@@ -74,13 +75,12 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted () { // 账户信息必须提前加载进来
     request({
       url: '/users'
     })
-      .then(res => { // 很尴尬的登陆方法，有点傻逼
-        this.username1 = res.data[0].account
-        this.password1 = res.data[0].password
+      .then(res => {
+        this.data = res.data
       })
       .catch(err => {
         console.log(err)
@@ -90,10 +90,19 @@ export default {
     this.creatCode()
   },
   methods: {
+    judgeLogin (account, pass) {
+      let judge = false
+      for (let i = 0; i < this.data.length; i++) {
+        if (account === this.data[i].account && pass === this.data[i].password) {
+          judge = true
+        }
+      }
+      return judge
+    },
     jump () { // 判断输入的对不对啥的，balabala
       const cinput = document.getElementById('codeinput')
       cinput.blur()
-      if (this.ruleForm.account === this.username1 && this.ruleForm.pass === this.password1) {
+      if (this.judgeLogin(this.ruleForm.account, this.ruleForm.pass)) {
         if (this.code === this.ruleForm.checkcode) {
           this.$alert('登陆成功', '恭喜你', {
             confirmButtonText: '确定'
@@ -114,6 +123,9 @@ export default {
         })
         this.creatCode()
       }
+    },
+    toRegister () {
+      this.$router.push('/register')
     },
     creatCode () { // 生成随机验证码的方法
       // 先清空验证码的输入

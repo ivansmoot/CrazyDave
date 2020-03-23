@@ -5,6 +5,7 @@ import login from '../components/Login.vue'
 import kanban from '../components/KanBan.vue'
 import chat from '../components/Chat.vue'
 import ranjin from '../components/RanJin.vue'
+import register from '../components/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -17,7 +18,8 @@ const router = new VueRouter({
     { path: '/login', component: login },
     { path: '/kanban', component: kanban },
     { path: '/chat', component: chat },
-    { path: '/ranjin', component: ranjin }
+    { path: '/ranjin', component: ranjin },
+    { path: '/register', component: register }
   ],
   scrollBehavior (to, from, savedPosition) {
     // 这个是为了每次跳转都能跳回页面顶部
