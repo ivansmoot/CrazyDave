@@ -43,3 +43,6 @@
 > -D：即--save-dev，下载至devDependencies，开发环境 </br>
 > npm查看当前项目的包：npm list --depth=0 </br>
 > npm查看全局的包: npm list --depth=0 -g </br>
+> 如果npm install报错4048 先npm cache clean --force 然后npm cache verify 再去npm install即可 </br>
+
+
