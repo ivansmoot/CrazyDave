@@ -151,19 +151,25 @@
       "username": "注册账号4",
       "date": "2020-02-24 12:00:22",
       "content": "注册账号4发表的\n"
+    },
+    {
+      "id": "e3IuOtIKiZcc3UR8srIlUDjd6ZAeG1W",
+      "username": "admin",
+      "date": "2020-02-24 20:15:49",
+      "content": "111"
     }
   ],
   "kanban": [
     {
-      "id": "b2bzue7jOhcGWZ4HsqM9l4nOAjWUZCU",
-      "key": "1",
-      "label": "111\n",
-      "location": "right"
+      "id": "f2PMpWawVlo5fzAzI28hMWJm0POmuXRQ",
+      "key": "2",
+      "label": "ssss",
+      "location": "left"
     },
     {
-      "id": "plFYYMEQGWWB7Ru4DOAg9O1yHbUA5WlN",
-      "key": "2",
-      "label": "222\n",
+      "id": "RkpPDcf9TZUIfTpeLSW3o25uAJ4KxXP8",
+      "key": "3",
+      "label": "aaa\n",
       "location": "left"
     }
   ]

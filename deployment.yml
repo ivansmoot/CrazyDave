@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crazydave-deployment
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: crazydave
+  template:
+    metadata:
+      labels:
+        app: crazydave
+    spec:
+      containers:
+      - name: crazydave
+        image: registry.cn-shanghai.aliyuncs.com/ivansmoot/crazy-dave:0.2.3
+        imagePullPolicy: Never
+        ports:
+        - name: http
+          containerPort: 80

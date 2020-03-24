@@ -33,6 +33,21 @@
 > 请勿push镜像到阿里云 </br>
 > 开发人员打的tag格式应为release-vX.X.X(例：release-v1.0.0)，否则无法触发阿里云的自动构建
 
+## 部署
+> minikube start --image-mirror-country cn \
+    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.7.3.iso \
+    --registry-mirror=https://hoxk59i9.mirror.aliyuncs.com \
+    --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers \
+    --vmdriver=none
+> </br> eval $(minikube docker-env) 切换到minikube的docker中 </br>
+> 从阿里云拉镜像 </br>
+> kubectl apply -f deployment.yml </br>
+> 可以kubectl get pods查看 </br>
+> kubectl apply -f service.yml </br>
+> kubectl get svc查看端口 </br>
+> minikube ip查看k8s虚拟机的ip </br>
+> 用ip:端口号进行访问
+
 ## 其他你可能用到的命令
 > 清空文件下的git：rm -rf .git/ </br>
 > 修改镜像名：docker tag 当前镜像名 目标镜像名 然后删除原有镜像即可 </br>
