@@ -95,6 +95,7 @@ export default {
           message: '成功退出账号'
         })
         this.login = false
+        this.$router.push('/')
       }).catch(() => {
         this.$message({
           type: 'info',

@@ -251,6 +251,7 @@ export default {
       })
       this.leftchoosen = []
       this.rightchoosen = []
+      this.visible1 = false
     }
   }
 }

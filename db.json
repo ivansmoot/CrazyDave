@@ -9,6 +9,11 @@
       "id": "mLGar216VhQmwIQsxphv2Q3IKWY1fo0V",
       "account": "测试账号",
       "password": "123"
+    },
+    {
+      "id": "7KrM8FEy4Dox45yziwmRTLyW5HFDFRVw",
+      "account": "注册账号2",
+      "password": "mima"
     }
   ],
   "content": [
@@ -107,32 +112,19 @@
       "username": "测试账号",
       "date": "2020-02-23 20:15:7",
       "content": "啥？"
+    },
+    {
+      "id": "yDb1URRVdsyvONEyaPzsyQ7S6YQNUvQ2",
+      "username": "注册账号2",
+      "date": "2020-02-24 11:08:24",
+      "content": "测试内容"
+    },
+    {
+      "id": "DKa7ErXptpC1PXvAkGKc0zbMCAYk3KL8",
+      "username": "admin",
+      "date": "2020-02-24 11:09:14",
+      "content": "admin账号登陆\n"
     }
   ],
-  "kanban": [
-    {
-      "id": "IiTtKwvghX0bpmiUMOOjW8ZjAPpFzGYM",
-      "key": "1",
-      "label": "左边1",
-      "location": "left"
-    },
-    {
-      "id": "liNf97YzIYoF3ENdu7IK3m9Kt7dg7FwI",
-      "key": "2",
-      "label": "右边1",
-      "location": "right"
-    },
-    {
-      "id": "m3Lv3XbQ0nwf3o6DGno6FoB2Q8WS9j6",
-      "key": "3",
-      "label": "左边2",
-      "location": "left"
-    },
-    {
-      "id": "2EgydBtpf3rIVFUV7VXTSXYf7R1CNsB",
-      "key": "4",
-      "label": "右边2",
-      "location": "right"
-    }
-  ]
+  "kanban": []
 }

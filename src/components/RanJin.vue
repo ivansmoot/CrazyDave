@@ -146,12 +146,14 @@ export default {
       const nwork = parseInt(this.input2)
       const daynum = nday - this.xData[0]
       if (this.judgedate()) {
-        if (daynum < this.yData2.length) {
-          this.yData2[daynum] = nwork
-          this.drawIt()
-        } else {
-          this.yData2[daynum] = nwork
-        }
+        // if (daynum < this.yData2.length) {
+        //   this.yData2[daynum] = nwork
+        //   this.drawIt()
+        // } else {
+        //   this.yData2[daynum] = nwork
+        // }
+        this.yData2[daynum] = nwork
+        this.drawIt()
       } else {
         this.$message({
           message: '你这日期输得有问题啊',
