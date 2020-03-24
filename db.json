@@ -14,6 +14,16 @@
       "id": "7KrM8FEy4Dox45yziwmRTLyW5HFDFRVw",
       "account": "注册账号2",
       "password": "mima"
+    },
+    {
+      "id": "5iN2fdjqBDIN9bcfna6TNiPVCWv3oP7z",
+      "account": "注册账号3",
+      "password": "mima"
+    },
+    {
+      "id": "Q2p8LYeJ9G2Jp6kctIVdXtuSVbrCOy3",
+      "account": "注册账号4",
+      "password": "mima"
     }
   ],
   "content": [
@@ -124,7 +134,32 @@
       "username": "admin",
       "date": "2020-02-24 11:09:14",
       "content": "admin账号登陆\n"
+    },
+    {
+      "id": "R18tn7EIbTWDy1sJUNCnRzDx3SWpBluu",
+      "username": "注册账号3",
+      "date": "2020-02-24 11:59:38",
+      "content": "注册账号3发布的言论"
+    },
+    {
+      "id": "Ci3JJLt9lc4IKPuf0fKAgCb4gXiMjnp",
+      "username": "注册账号4",
+      "date": "2020-02-24 12:00:22",
+      "content": "注册账号4发表的\n"
     }
   ],
-  "kanban": []
+  "kanban": [
+    {
+      "id": "b2bzue7jOhcGWZ4HsqM9l4nOAjWUZCU",
+      "key": "1",
+      "label": "111\n",
+      "location": "right"
+    },
+    {
+      "id": "plFYYMEQGWWB7Ru4DOAg9O1yHbUA5WlN",
+      "key": "2",
+      "label": "222\n",
+      "location": "left"
+    }
+  ]
 }
