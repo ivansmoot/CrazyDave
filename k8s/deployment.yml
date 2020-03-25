@@ -2,21 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: crazydave-deployment
-  namespace: default
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: crazydave
+      name: nginx
   template:
     metadata:
       labels:
-        app: crazydave
+        name: nginx
     spec:
       containers:
-      - name: crazydave
+      - name: nginx
         image: registry.cn-shanghai.aliyuncs.com/ivansmoot/crazy-dave:0.2.3
         imagePullPolicy: Never
         ports:
-        - name: http
-          containerPort: 80
+        - containerPort: 80
