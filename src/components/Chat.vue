@@ -42,11 +42,24 @@
                 <el-button size="mini" type="text" @click="scope._self.$refs[scope.row.id].doClose()">取消</el-button>
                 <el-button type="primary" size="mini" @click="reply(scope)">确定</el-button>
               </div>
-              <el-button slot="reference" type="text" size="small">回复</el-button>
-
+              <el-button slot="reference" type="text" size="small" style="position:absolute; top: 10px; right: 76px;">回复</el-button>
             </el-popover>
-
-            <el-button type="text" size="small">查看</el-button>
+            <el-popover
+              placement="right"
+              width="400"
+              trigger="click"
+              :ref="scope.row.date">
+              <el-card class="box-card" style="position: absolute; top: -50px; left: -50px">
+              <div slot="header" class="clearfix">
+                <span>全部回复</span>
+                <el-button style="float: right; padding: 3px 0" type="text" @click="scope._self.$refs[scope.row.date].doClose()">取消</el-button>
+              </div>
+              <div v-for="o in getReplys" :key="o" class="text item">
+                {{ o }}
+              </div>
+            </el-card>
+            <el-button slot="reference" type="text" size="small" @click="lookReply(scope)" style="position:absolute; top: 10px; right: 48px;">查看</el-button>
+            </el-popover>
           </template>
         </el-table-column>
       </el-table>
@@ -83,7 +96,26 @@
 </template>
 
 <style scoped>
+.text {
+  font-size: 14px;
+}
 
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both
+}
+
+.box-card {
+  width: 480px;
+}
 </style>
 
 <script>
@@ -100,7 +132,8 @@ export default {
       pagesize: 6, // 每页最多显示6条数据
       currentPage: 1,
       filterInfs: [],
-      uname: ''
+      uname: '',
+      getReplys: []
     }
   },
   mounted () {
@@ -160,6 +193,25 @@ export default {
                 console.log(res)
               })
               this.textarea2 = ''
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    lookReply (scope) {
+      this.getReplys = []
+      request({
+        url: '/content'
+      })
+        .then(res => {
+          for (let i = 0; i < res.data.length; i++) {
+            if (res.data[i].id === scope.row.id) {
+              console.log(res.data[i].reply)
+              for (let j = 2; j < res.data[i].reply.length; j++) {
+                this.getReplys.push(res.data[i].reply[j])
+              }
             }
           }
         })
