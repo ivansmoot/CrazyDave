@@ -24,7 +24,21 @@
           label="操作"
           width="100">
           <template slot-scope="scope">
-            <el-button @click="reply(scope.row)" type="text" size="small">回复</el-button>
+
+            <el-popover
+              placement="top"
+              width="160"
+              :ref="scope.row.id">
+              <p>这是一段内容这是一段内容确定删除吗？</p>
+              <div style="text-align: right; margin: 0">
+                <!-- element的popover控件和teble控件配合有问题，一起用的时候必须要这样才能关掉 -->
+                <el-button size="mini" type="text" @click="scope._self.$refs[scope.row.id].doClose()">取消</el-button>
+                <el-button type="primary" size="mini" @click="reply(scope.row)">确定</el-button>
+              </div>
+              <el-button slot="reference" type="text" size="small">回复</el-button>
+
+            </el-popover>
+
             <el-button type="text" size="small">查看</el-button>
           </template>
         </el-table-column>

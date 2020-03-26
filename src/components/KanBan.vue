@@ -156,7 +156,7 @@ export default {
         }
       }
     },
-    handleCurrentChange (currentPage) { // 这玩意到底是干啥的
+    handleCurrentChange (currentPage) {
       this.currentPage = currentPage
     },
     randomString (len) { // 同样的方法生成流水号
