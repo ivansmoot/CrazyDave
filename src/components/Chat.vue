@@ -29,11 +29,18 @@
               placement="top"
               width="160"
               :ref="scope.row.id">
-              <p>这是一段内容这是一段内容确定删除吗？</p>
+              <el-input
+                type="textarea2"
+                :autosize="{ minRows: 2, maxRows: 4}"
+                placeholder="请输入内容"
+                v-model="textarea2"
+                style="position:absolute; left: 0; top: -45px"
+                @keyup.enter.native="reply(scope)">
+              </el-input>
               <div style="text-align: right; margin: 0">
                 <!-- element的popover控件和teble控件配合有问题，一起用的时候必须要这样才能关掉 -->
                 <el-button size="mini" type="text" @click="scope._self.$refs[scope.row.id].doClose()">取消</el-button>
-                <el-button type="primary" size="mini" @click="reply(scope.row)">确定</el-button>
+                <el-button type="primary" size="mini" @click="reply(scope)">确定</el-button>
               </div>
               <el-button slot="reference" type="text" size="small">回复</el-button>
 
@@ -88,7 +95,8 @@ export default {
   name: 'chat',
   data () {
     return {
-      textarea: '',
+      textarea: '', // 最下面的评论框
+      textarea2: '', // 回复评论框
       pagesize: 6, // 每页最多显示6条数据
       currentPage: 1,
       filterInfs: [],
@@ -127,22 +135,37 @@ export default {
     }
   },
   methods: {
-    reply (row) {
-      let thisRowReply
+    reply (scope) {
+      scope._self.$refs[scope.row.id].doClose()
       request({
         url: '/content'
       })
         .then(res => {
           for (let i = 0; i < res.data.length; i++) {
-            if (res.data[i].id === row.id) {
-              thisRowReply = res.data[i].reply
+            if (res.data[i].id === scope.row.id) {
+              const thisId = res.data[i].id
+              const thisRowReply = []
+              for (let j = 0; j < res.data[i].reply.length; j++) {
+                thisRowReply.push(res.data[i].reply[j])
+              }
+              thisRowReply.push(this.textarea2)
+              const postData = this.$qs.stringify({
+                reply: thisRowReply
+              }, { arrayFormat: 'repeat' })
+              request({
+                method: 'patch',
+                url: '/content/' + thisId,
+                data: postData
+              }).then((res) => {
+                console.log(res)
+              })
+              this.textarea2 = ''
             }
           }
         })
         .catch(err => {
           console.log(err)
         })
-      console.log(thisRowReply)
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
@@ -189,7 +212,8 @@ export default {
         username: this.uname, // username根据当前登陆用户来
         date: this.getdate(), // 时间就是当前时间
         content: this.textarea, // 获取评论框中的内容
-        reply: ['评论占位']
+        reply: ['', ''],
+        alreadyReadNum: 0
       }, { arrayFormat: 'repeat' }) // fix axios传递数组过去有问题
       request({ // 把文本框的内容发送给db.json
         method: 'post',
