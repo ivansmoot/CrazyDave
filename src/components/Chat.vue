@@ -130,15 +130,15 @@ export default {
       textarea: '', // 最下面的评论框
       textarea2: '', // 回复评论框
       pagesize: 6, // 每页最多显示6条数据
-      currentPage: 1,
-      filterInfs: [],
-      uname: '',
-      getReplys: []
+      currentPage: 1, // 当前页
+      filterInfs: [], // 切片前的全部数据
+      uname: '', // 当前登陆用户
+      getReplys: [] // 全部回复的评论
     }
   },
   mounted () {
     if (this.$parent.login === false) { // 获取父组件里的登陆信息
-      this.$confirm('该功能需要先登陆', '提示', {
+      this.$confirm('该功能需要先登陆', '提示', { // 没登陆就要么登陆，要么返回首页
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -149,7 +149,7 @@ export default {
       })
     }
     this.uname = this.$parent.uname
-    request({
+    request({ // mounted提前把数据刷出来
       url: '/content'
     })
       .then(res => {
@@ -161,15 +161,15 @@ export default {
   },
   computed: {
     tableData () { // 表格内容就是绑定的这个叫tableData的计算属性的返回值，这个值根据filterInfs切片得到
-      return this.filterInfs.slice(
+      return this.filterInfs.slice( // slice方法两个参数start和end，很显然应该这么写
         (this.currentPage - 1) * this.pagesize,
         this.currentPage * this.pagesize
       )
     }
   },
   methods: {
-    reply (scope) {
-      scope._self.$refs[scope.row.id].doClose()
+    reply (scope) { // 回复评论的方法
+      scope._self.$refs[scope.row.id].doClose() // 先把回复窗口关掉
       request({
         url: '/content'
       })
@@ -178,11 +178,11 @@ export default {
             if (res.data[i].id === scope.row.id) {
               const thisId = res.data[i].id
               const thisRowReply = []
-              for (let j = 0; j < res.data[i].reply.length; j++) {
+              for (let j = 0; j < res.data[i].reply.length; j++) { // 先拿到已有的评论
                 thisRowReply.push(res.data[i].reply[j])
               }
-              thisRowReply.push(this.textarea2)
-              const postData = this.$qs.stringify({
+              thisRowReply.push(this.textarea2) // 再把已有的评论加上本次的评论
+              const postData = this.$qs.stringify({ // 然后把合并的评论发过去
                 reply: thisRowReply
               }, { arrayFormat: 'repeat' })
               request({
@@ -200,12 +200,12 @@ export default {
           console.log(err)
         })
     },
-    lookReply (scope) {
+    lookReply (scope) { // 查看所有评论的方法
       this.getReplys = []
       request({
         url: '/content'
       })
-        .then(res => {
+        .then(res => { // 找到id一样的评论
           for (let i = 0; i < res.data.length; i++) {
             if (res.data[i].id === scope.row.id) {
               console.log(res.data[i].reply)
