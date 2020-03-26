@@ -24,7 +24,7 @@
     <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
       <div class="my-3 py-3">
         <h2 class="display-5">燃尽图</h2>
-        <el-link @click="toRanJin">点此打开燃尽图<i class="el-icon-view el-icon--right"></i> </el-link>
+        <el-link @click="toRanJin" style="color: grey">点此打开燃尽图<i class="el-icon-view el-icon--right"></i> </el-link>
       </div>
       <!-- <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
       </div> -->
