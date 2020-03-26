@@ -1,6 +1,6 @@
 <template>
   <div id='chat'>
-    <div style="position:relative; width:600px; height:440px; box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); margin: 0 auto">
+    <div style="position:relative; width:1000px; height:440px; box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); margin: 0 auto">
       <el-table
         :data="tableData"
         stripe
@@ -19,14 +19,25 @@
           prop="content"
           label="内容">
         </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="100">
+          <template slot-scope="scope">
+            <el-button @click="reply(scope.row)" type="text" size="small">回复</el-button>
+            <el-button type="text" size="small">查看</el-button>
+          </template>
+        </el-table-column>
       </el-table>
+      <p></p>
       <el-pagination
         @current-change="handleCurrentChange"
         background
         layout="prev, pager, next"
         :page-size="pagesize"
-        :total="this.filterInfs.length"
-        style="position:absolute; top:400px; left:180px">
+        :total="this.filterInfs.length + 1"
+        :current-page.sync="currentPage"
+        style="position:absolute; top:400px; left: 320px">
       </el-pagination>
     </div>
     <p></p>
@@ -102,6 +113,12 @@ export default {
     }
   },
   methods: {
+    reply (row) {
+      console.log(row.id)
+      // console.log(this.currentPage)
+      // const thisCommentNum = row * this.currentPage
+      // console.log(thisCommentNum)
+    },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
     },
@@ -163,7 +180,11 @@ export default {
         console.log(err)
       })
       this.textarea = '' // 重置文本框的内容为空，不然显得很傻逼
-      this.currentPage = Math.ceil(this.filterInfs.length / this.pagesize)
+      console.log(this.filterInfs.length + 1)
+      console.log(this.pagesize)
+      this.currentPage = Math.ceil((this.filterInfs.length + 1) / this.pagesize)
+      console.log('应该跳到第几页')
+      console.log(this.currentPage)
     }
   }
 }
