@@ -1,6 +1,6 @@
 <template>
   <div id='chat'>
-    <div style="position:relative; width:1000px; height:440px; box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); margin: 0 auto">
+    <div style="position:relative; width:1000px; height: auto;min-height:440px; box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); margin: 0 auto">
       <el-table
         :data="tableData"
         stripe
@@ -29,7 +29,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <p></p>
+      <div style="height:50px"></div>
       <el-pagination
         @current-change="handleCurrentChange"
         background
@@ -37,7 +37,7 @@
         :page-size="pagesize"
         :total="this.filterInfs.length + 1"
         :current-page.sync="currentPage"
-        style="position:absolute; top:400px; left: 320px">
+        style="position:absolute; bottom:10px; left: 400px">
       </el-pagination>
     </div>
     <p></p>
@@ -114,10 +114,21 @@ export default {
   },
   methods: {
     reply (row) {
-      console.log(row.id)
-      // console.log(this.currentPage)
-      // const thisCommentNum = row * this.currentPage
-      // console.log(thisCommentNum)
+      let thisRowReply
+      request({
+        url: '/content'
+      })
+        .then(res => {
+          for (let i = 0; i < res.data.length; i++) {
+            if (res.data[i].id === row.id) {
+              thisRowReply = res.data[i].reply
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      console.log(thisRowReply)
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage
@@ -163,8 +174,9 @@ export default {
         id: this.randomString(32), // 生成一个32位流水号(是不是有点长啊？)
         username: this.uname, // username根据当前登陆用户来
         date: this.getdate(), // 时间就是当前时间
-        content: this.textarea // 获取评论框中的内容
-      })
+        content: this.textarea, // 获取评论框中的内容
+        reply: ['评论占位']
+      }, { arrayFormat: 'repeat' }) // fix axios传递数组过去有问题
       request({ // 把文本框的内容发送给db.json
         method: 'post',
         url: '/content',
@@ -180,11 +192,7 @@ export default {
         console.log(err)
       })
       this.textarea = '' // 重置文本框的内容为空，不然显得很傻逼
-      console.log(this.filterInfs.length + 1)
-      console.log(this.pagesize)
       this.currentPage = Math.ceil((this.filterInfs.length + 1) / this.pagesize)
-      console.log('应该跳到第几页')
-      console.log(this.currentPage)
     }
   }
 }
