@@ -57,8 +57,11 @@
               <div v-for="o in getReplys" :key="o" class="text item">
                 {{ o }}
               </div>
-            </el-card>
-            <el-button slot="reference" type="text" size="small" @click="lookReply(scope)" style="position:absolute; top: 10px; right: 48px;">查看</el-button>
+              </el-card>
+              <el-button slot="reference" type="text" size="small" @click="lookReply(scope)" style="position:absolute; top: 5px; right: 20px;">
+                查看
+                <el-badge class="mark" :value="replynum(scope, filterInfs)" style="background-color: white" size="mini"/>
+              </el-button>
             </el-popover>
           </template>
         </el-table-column>
@@ -116,6 +119,11 @@
 .box-card {
   width: 480px;
 }
+
+.itembadge {
+  margin-top: 10px;
+  margin-right: 40px;
+}
 </style>
 
 <script>
@@ -165,6 +173,17 @@ export default {
         (this.currentPage - 1) * this.pagesize,
         this.currentPage * this.pagesize
       )
+    },
+    replynum () {
+      return function (scope, filterInfs) {
+        let replyNum
+        for (let i = 0; i < filterInfs.length; i++) {
+          if (scope.row.id === filterInfs[i].id) {
+            replyNum = filterInfs[i].reply.length - filterInfs[i].alreadyReadNum - 2
+          }
+        }
+        return replyNum
+      }
     }
   },
   methods: {
@@ -199,6 +218,15 @@ export default {
         .catch(err => {
           console.log(err)
         })
+      request({
+        url: '/content'
+      })
+        .then(res => {
+          this.filterInfs = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     lookReply (scope) { // 查看所有评论的方法
       this.getReplys = []
@@ -208,10 +236,24 @@ export default {
         .then(res => { // 找到id一样的评论
           for (let i = 0; i < res.data.length; i++) {
             if (res.data[i].id === scope.row.id) {
-              console.log(res.data[i].reply)
               for (let j = 2; j < res.data[i].reply.length; j++) {
                 this.getReplys.push(res.data[i].reply[j])
               }
+            }
+          }
+          for (let k = 0; k < this.filterInfs.length; k++) {
+            if (this.filterInfs[k].id === scope.row.id) {
+              this.filterInfs[k].alreadyReadNum = this.filterInfs[k].reply.length - 2
+              const postData = this.$qs.stringify({
+                alreadyReadNum: this.filterInfs[k].alreadyReadNum
+              })
+              request({
+                method: 'patch',
+                url: '/content/' + this.filterInfs[k].id,
+                data: postData
+              }).then(res => {
+                console.log(res)
+              })
             }
           }
         })
