@@ -212,17 +212,17 @@ export default {
                 console.log(res)
               })
               this.textarea2 = ''
+              request({
+                url: '/content'
+              })
+                .then(res => {
+                  this.filterInfs = res.data
+                })
+                .catch(err => {
+                  console.log(err)
+                })
             }
           }
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      request({
-        url: '/content'
-      })
-        .then(res => {
-          this.filterInfs = res.data
         })
         .catch(err => {
           console.log(err)
