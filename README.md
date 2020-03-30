@@ -11,6 +11,8 @@
 > git init </br>
 > git pull https://github.com/ivansmoot/CrazyDave.git </br>
 > npm install 下载依赖 </br>
+> 修改package.json中，scripts里的js命令的ip为你的本机ip </br>
+> 修改network文件夹下request.js文件中的baseURL为你的本机ip </br>
 > npm run js 启动后端模拟端口 </br>
 > npm run serve 启动项目 </br>
 > enjoy your code

@@ -1,5 +1,5 @@
 module.exports = {
-  devServer: {
+  devServer: { // 已经不用了
     proxy:{
       '/apis': {//代理api
         target: "http://192.168.10.210:3000",//服务器api地址
