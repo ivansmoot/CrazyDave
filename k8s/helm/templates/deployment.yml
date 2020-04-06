@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crazydave-deployment
+  name: my-chart
 spec:
   replicas: 2
   selector:
     matchLabels:
-      name: nginx
+      name: my-chart
   template:
     metadata:
       labels:
-        name: nginx
+        name: my-chart
     spec:
       containers:
-      - name: nginx
-        image: registry.cn-shanghai.aliyuncs.com/ivansmoot/crazy-dave:0.3.0
+      - name: my-chart
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: Never
         ports:
         - containerPort: 80
+          protocol: TCP

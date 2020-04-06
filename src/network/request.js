@@ -3,7 +3,7 @@ import axios from 'axios'
 export function request (config) {
   const instance1 = axios.create({
     // baseURL: '/apis'
-    baseURL: 'http://192.168.1.110:3000'
+    baseURL: 'https://160bd2b7.ngrok.io'
   })
   return instance1(config)
 }

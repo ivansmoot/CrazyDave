@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: registry.cn-shanghai.aliyuncs.com/ivansmoot/crazy-dave:0.2.3
+        image: registry.cn-shanghai.aliyuncs.com/ivansmoot/crazy-dave:0.3.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
