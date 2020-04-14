@@ -111,7 +111,7 @@ export default {
           this.$alert('登陆成功', '恭喜你', {
             confirmButtonText: '确定'
           })
-          this.$store.commit('login/llllogin')
+          this.$store.commit('login/llllogin') // 修改vuex中的状态
           this.$emit('transfer', true) // 给父组件传值
           this.$emit('transfer2', this.ruleForm.account)
           this.$router.push('/')

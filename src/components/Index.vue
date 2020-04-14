@@ -76,7 +76,7 @@ export default {
     }
   },
   computed: mapState({
-    amilogin: state => state.login.islogin0
+    amilogin: state => state.login.islogin0 // 获取vuex中的状态
   }),
   methods: {
     tohome () {
@@ -99,7 +99,7 @@ export default {
           message: '成功退出账号'
         })
         this.login = false
-        this.$store.commit('login/nnnlogin')
+        this.$store.commit('login/nnnlogin') // 修改vuex中的状态
         // this.$router.login.commit('nnnlogin')
       }).catch(() => {
         this.$message({
