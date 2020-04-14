@@ -49,6 +49,7 @@
 
 <script>
 import { request } from '../network/request'
+import { mapState } from 'vuex'
 
 export default {
   name: 'login',
@@ -89,6 +90,9 @@ export default {
   created () { // 页面出来的时候就要有验证码
     this.creatCode()
   },
+  computed: mapState({
+    // haslogin: state => state.login.haslogin
+  }),
   methods: {
     judgeLogin (account, pass) {
       let judge = false
@@ -107,6 +111,7 @@ export default {
           this.$alert('登陆成功', '恭喜你', {
             confirmButtonText: '确定'
           })
+          this.$store.commit('login/llllogin')
           this.$emit('transfer', true) // 给父组件传值
           this.$emit('transfer2', this.ruleForm.account)
           this.$router.push('/')

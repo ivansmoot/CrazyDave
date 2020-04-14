@@ -5,7 +5,7 @@
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="#">Features</a>
         <a class="p-2 text-dark" href="#">Enterprise</a>
-        <a class="p-2 text-dark" href="#">Support</a>
+        <a class="p-2 text-dark" href="#">{{ amilogin }}</a>
         <a class="p-2 text-dark" @click="tochat">Chat</a>
       </nav>
       <a class="btn btn-outline-primary" v-show="!login" @click="tologin">log in</a>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'index',
   data () {
@@ -74,6 +75,9 @@ export default {
       uname: ''
     }
   },
+  computed: mapState({
+    amilogin: state => state.login.islogin0
+  }),
   methods: {
     tohome () {
       this.$router.push('/')
@@ -95,7 +99,8 @@ export default {
           message: '成功退出账号'
         })
         this.login = false
-        this.$router.push('/')
+        this.$store.commit('login/nnnlogin')
+        // this.$router.login.commit('nnnlogin')
       }).catch(() => {
         this.$message({
           type: 'info',

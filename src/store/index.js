@@ -1,15 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import login from './modules/login'
+import index from './modules/index'
 
 Vue.use(Vuex)
 
+const debug = process.env.NODE_ENV !== 'production'
+
 export default new Vuex.Store({
+  modules: {
+    login,
+    index
+  },
   state: {
+    islogin1: false
   },
   mutations: {
+    llllogin1 (state) {
+      state.islogin1 = true
+    },
+    nnnlogin1 (state) {
+      state.islogin1 = false
+    }
   },
-  actions: {
-  },
-  modules: {
-  }
+  strict: debug
 })
