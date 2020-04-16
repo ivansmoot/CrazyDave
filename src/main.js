@@ -7,6 +7,15 @@ import 'element-ui/lib/theme-chalk/index.css'
 import index from './components/Index.vue'
 import router from './router/index.js'
 import store from './store'
+import * as Sentry from '@sentry/browser'
+import * as Integrations from '@sentry/integrations'
+
+Sentry.init({
+  dsn: 'https://68de2092117f4935876222ebf7bd3d5a@o376878.ingest.sentry.io/5198161',
+  integrations: [new Integrations.Vue({ Vue, attachProps: true })],
+  release: 'crazydave@0.3.0',
+  logErrors: true
+})
 
 Vue.component('v-chart', ECharts)
 Vue.use(ElementUI)
