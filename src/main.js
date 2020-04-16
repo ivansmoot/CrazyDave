@@ -13,7 +13,7 @@ import * as Integrations from '@sentry/integrations'
 Sentry.init({
   dsn: 'https://68de2092117f4935876222ebf7bd3d5a@o376878.ingest.sentry.io/5198161',
   integrations: [new Integrations.Vue({ Vue, attachProps: true })],
-  release: 'crazydave@0.3.0',
+  release: 'crazydave@0.5.0',
   logErrors: true
 })
 
