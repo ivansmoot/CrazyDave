@@ -50,6 +50,9 @@
 <script>
 import { request } from '../network/request'
 import { mapState } from 'vuex'
+import Vue from 'vue'
+import ElementUI from 'element-ui'
+Vue.use(ElementUI)
 
 export default {
   name: 'login',
