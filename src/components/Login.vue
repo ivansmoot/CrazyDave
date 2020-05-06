@@ -8,16 +8,16 @@
 
     <el-form status-icon :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" style="margin-left: -30px">
       <el-form-item label="账号" prop="account">
-        <el-input v-model="ruleForm.account" style="width: 400px" placeholder="admin"></el-input>
+        <el-input name="login" v-model="ruleForm.account" style="width: 400px" placeholder="admin"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="ruleForm.pass" style="width: 400px" placeholder="password"></el-input>
+        <el-input name="password" type="password" v-model="ruleForm.pass" style="width: 400px" placeholder="password"></el-input>
       </el-form-item>
       <el-form-item label="验证码" prop="checkcode">
-        <el-input id="codeinput" v-model="ruleForm.checkcode" style="width: 300px" @keyup.enter.native="jump()" placeholder="Verification code"></el-input>
+        <el-input name="checkcode" id="codeinput" v-model="ruleForm.checkcode" style="width: 300px" @keyup.enter.native="jump()" placeholder="Verification code"></el-input>
       </el-form-item>
       <div style="position:absolute;right:30px;bottom:237px;">
-        <el-button type="primary" round @click="creatCode" >{{code}}</el-button>
+        <el-button id="checkbutton" type="primary" round @click="creatCode" >{{code}}</el-button>
       </div>
       <div style="position:absolute;right:37px;bottom:187px;">
         <el-link type="info" @click="toRegister">没有账号？前去注册</el-link>
@@ -30,7 +30,7 @@
       </label>
     </div>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="jump" v-show="dialog_visible">登录</button>
+    <button id="loginbutton" class="btn btn-lg btn-primary btn-block" type="submit" @click="jump" v-show="dialog_visible">登录</button>
 
   </div>
 </template>

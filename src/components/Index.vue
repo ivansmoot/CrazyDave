@@ -5,7 +5,7 @@
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="#" @click="abug">Features</a>
         <a class="p-2 text-dark" href="#">Enterprise</a>
-        <a class="p-2 text-dark" href="#">{{ amilogin }}</a>
+        <a id="jglogin" class="p-2 text-dark" href="#">{{ amilogin }}</a>
         <a class="p-2 text-dark" @click="tochat">Chat</a>
       </nav>
       <a class="btn btn-outline-primary" v-show="!login" @click="tologin">log in</a>
