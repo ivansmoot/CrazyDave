@@ -10,6 +10,13 @@ import store from './store'
 import * as Sentry from '@sentry/browser'
 import * as Integrations from '@sentry/integrations'
 import login from './components/Login.vue'
+import VueI18n from 'vue-i18n'
+import enLocale from './assets/languages/en'
+import zhLocale from './assets/languages/zh'
+import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
+import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
+
+Vue.use(VueI18n)
 
 Sentry.init({
   dsn: 'https://68de2092117f4935876222ebf7bd3d5a@o376878.ingest.sentry.io/5198161',
@@ -18,12 +25,27 @@ Sentry.init({
   logErrors: true
 })
 
+const i18n = new VueI18n({
+  locale: 'zh',
+  messages: {
+    zh: {
+      ...zhLocale,
+      ...elementZhLocale
+    },
+    en: {
+      ...enLocale,
+      ...elementEnLocale
+    }
+  }
+})
+
 Vue.component('v-chart', ECharts)
 Vue.use(ElementUI)
 
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(index),
   components: { login }
 }).$mount('#app')

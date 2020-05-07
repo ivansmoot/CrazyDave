@@ -1,15 +1,16 @@
 <template>
   <div id="index">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <h5 class="my-0 mr-md-auto font-weight-normal" @click="tohome">Powered by Webpack</h5>
+      <h5 class="my-0 mr-md-auto font-weight-normal" @click="tohome">{{$t("firstpage.powerby")}}</h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#" @click="abug">Features</a>
-        <a class="p-2 text-dark" href="#">Enterprise</a>
+        <el-button icon="el-icon" circle @click="changelan">{{ lan }}</el-button>
+        <a class="p-2 text-dark" href="#" @click="abug">{{$t("firstpage.features")}}</a>
+        <a class="p-2 text-dark" href="#">{{$t("firstpage.enterprise")}}</a>
         <a data-cy="jglogin" class="p-2 text-dark" href="#">{{ amilogin }}</a>
-        <a class="p-2 text-dark" @click="tochat">Chat</a>
+        <a class="p-2 text-dark" @click="tochat">{{$t("firstpage.chat")}}</a>
       </nav>
-      <a data-cy="loginbtn" class="btn btn-outline-primary" v-show="!login" @click="tologin">log in</a>
-      <a class="btn btn-outline-primary" v-show="login" @click="logout">log out</a>
+      <a data-cy="loginbtn" class="btn btn-outline-primary" v-show="!login" @click="tologin">{{$t("firstpage.login")}}</a>
+      <a class="btn btn-outline-primary" v-show="login" @click="logout">{{$t("firstpage.logout")}}</a>
     </div>
 
     <router-view @transfer="islogin" @transfer2="username">
@@ -72,7 +73,8 @@ export default {
   data () {
     return {
       login: false,
-      uname: ''
+      uname: '',
+      lan: '中文'
     }
   },
   computed: mapState({
@@ -117,6 +119,15 @@ export default {
     },
     abug () {
       this.$router.commit('wrongcommit')
+    },
+    changelan () {
+      if (this.lan === '中文') {
+        this.lan = 'en'
+        this.$i18n.locale = 'en'
+      } else {
+        this.lan = '中文'
+        this.$i18n.locale = 'zh'
+      }
     }
   }
 }

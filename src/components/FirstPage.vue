@@ -3,16 +3,14 @@
   <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
       <h1 class="display-4 font-weight-normal">Devops</h1>
-      <p class="lead font-weight-normal">DevOps is a set of practices that combines software
-        development (Dev) and information-technology operations (Ops) which aims to shorten the systems
-        development life cycle and provide continuous delivery with high software quality.</p>
+      <p class="lead font-weight-normal">{{$t("firstpage.whatisdevops")}}</p>
       <el-popover
         placement="top-start"
         title="页面跳转"
         width="300"
         trigger="hover"
         content="将会跳转至我的github地址，由于github服务器在国外，打开稍慢">
-        <el-button slot="reference" class="thisbtn" @click="tomygithub">My github</el-button>
+        <el-button slot="reference" class="thisbtn" @click="tomygithub">{{$t("firstpage.mygithub")}}</el-button>
       </el-popover>
 
     </div>
@@ -23,8 +21,8 @@
   <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
     <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
       <div class="my-3 py-3">
-        <h2 class="display-5">燃尽图</h2>
-        <el-link @click="toRanJin" style="color: grey">点此打开燃尽图<i class="el-icon-view el-icon--right"></i> </el-link>
+        <h2 class="display-5">{{$t("firstpage.burndown")}}</h2>
+        <el-link @click="toRanJin" style="color: grey">{{$t("firstpage.openbd")}}<i class="el-icon-view el-icon--right"></i> </el-link>
       </div>
       <!-- <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
       </div> -->
@@ -38,8 +36,8 @@
     </div>
     <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
       <div class="my-3 p-3">
-        <h2 class="display-5">Kanban</h2>
-        <el-link @click="toKanBan">click here to use a simple Kanban<i class="el-icon-view el-icon--right"></i> </el-link>
+        <h2 class="display-5">{{$t("firstpage.kanban")}}</h2>
+        <el-link @click="toKanBan">{{$t("firstpage.openkb")}}<i class="el-icon-view el-icon--right"></i> </el-link>
       </div>
       <div class="demo-image__preview">
         <el-image
