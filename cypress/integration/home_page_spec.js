@@ -15,7 +15,7 @@ describe('login component', function() {
 
     // 判断log in按钮是否可见，然后点击跳转至登陆页
     cy.get('[data-cy=loginbtn]')
-      .contains('log in')
+      .contains('登陆')
       .should('be.visible')
       .click()
 
